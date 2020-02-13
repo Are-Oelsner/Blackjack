@@ -57,6 +57,14 @@ def Blackjack():
                 print(', ' + str(cards), end='')
             print('\t\tsum: ' + str(Player))
 
+    def resoveDealer():
+        if Dealer >= 17:
+            return Dealer
+        while Dealer <= 16:
+            newCard = D.draw()
+            DealerHand.append(newCard)
+            Dealer += newCard.value
+
     # Check dealers hand for 21 before hitting
     # If the dealer has >= 17 with first two cards it must stand. If it is 16 or under it must take a card.
     # It must then continue to take cards until the total is 17 or higher, but not over 21, or goes bust if it
@@ -73,6 +81,7 @@ def Blackjack():
     Player = 0              # Current value of Player hand
     Dealer = 0              # Current value of Dealer hand
     PlayerHand = []         # Successive cards added to Player after initial two
+    DealerHand = []         # Successive cards added to Dealer after initial two
 
     # Two cards each are drawn for the player and dealer
     pcard1 = D.draw().value
@@ -87,13 +96,24 @@ def Blackjack():
     # Prints known information about Player and Dealer hands
     printHands(False)
 
+    if Player > 21:
+        print('You went bust! Your hand had a value of ' + Player) # TODO add support for continued games
+        break
+        
     print('would you like to stand (s), or hit(h)?')
     action = input()
     while action != 's' and action != 'h':
         print('invalid response, would you like to stand (s), or hit(h)?')
         action = input()
     if action == 's':
-        print('Todo') # TODO
+        resolveDealer()
+        if Dealer > 21
+            print('The dealer went bust! You win!')
+            break
+        if Player > Dealer and Player <= 21: # TODO Add support for 21 getting double winnings
+            print('You won!')
+            break # TODO add support for continued games
+
     if action == 'h':
         print('Todo') # TODO
 
