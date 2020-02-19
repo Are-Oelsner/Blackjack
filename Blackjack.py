@@ -56,14 +56,14 @@ def Blackjack():
             for cards in PlayerHand:
                 print(str(cards) +  ', ', end='')
             print(' ')
-            print('  sum: ' + str(Player))
+            print('Player sum: ' + str(Player))
         if show == False:
             print('Dealer\'s Hand: \tcovered, ' + str(dcard2))
             print('Your Hand: \t', end='')
             for cards in PlayerHand:
                 print(str(cards) +  ', ', end='')
             print(' ')
-            print('  sum: ' + str(Player))
+            print('Player sum: ' + str(Player))
 
 
     # Check dealers hand for 21 before hitting
@@ -77,13 +77,16 @@ def Blackjack():
     # Initializes and prepares the deck
     D = Deck()
     D.genDeck()
-    print('Shuffling the deck', end='')
     D.shuffle()
+
+    print('Shuffling the deck')
+
     time.sleep(.5)
-    print('.', end='')
+
+    print('...', end='')
+
     time.sleep(.5)
-    print('.', end='')
-    time.sleep(.5)
+
     print('.\n\n')
     
 
@@ -163,7 +166,14 @@ def Blackjack():
         
     
 numWins = 0
-print('\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome to Blackjack!\n')
+print(' __          __  _                            _          ____  _            _    _            _    _ ')
+print(' \ \        / / | |                          | |        |  _ \| |          | |  (_)          | |  | |')
+print('  \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |_) | | __ _  ___| | ___  __ _  ___| | _| |')
+print('   \ \/  \/ / _ \ |/ __/ _ \| \'_ ` _ \ / _ \ | __/ _ \  |  _ <| |/ _` |/ __| |/ / |/ _` |/ __| |/ / |')
+print('    \  /\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |_) | | (_| | (__|   <| | (_| | (__|   <|_| ')
+print('     \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/  |____/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_(_) ')
+print('                                                                               _/ |                ')
+print('     Game by Are Oelsner                                                      |__/                \n')
 action = 'y'
 while action == 'y':
     if Blackjack() == True:
