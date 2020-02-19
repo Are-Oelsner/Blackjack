@@ -58,12 +58,11 @@ def Blackjack():
             print('\t\tsum: ' + str(Player))
 
     def resoveDealer():
-        if Dealer >= 17:
-            return Dealer
         while Dealer <= 16:
             newCard = D.draw()
             DealerHand.append(newCard)
             Dealer += newCard.value
+        return Dealer
 
     # Check dealers hand for 21 before hitting
     # If the dealer has >= 17 with first two cards it must stand. If it is 16 or under it must take a card.
