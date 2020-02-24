@@ -41,7 +41,7 @@ class Deck:
 
 
 # Blackjack game code
-def Blackjack():
+def Blackjack(wallet):
     # Displays the game board by showing information available to the player
     # Show parameter reveals the Dealer's first card to the player when true
     def printHands(show):
@@ -56,6 +56,7 @@ def Blackjack():
             for cards in PlayerHand:
                 print(str(cards) +  ', ', end='')
             print(' ')
+            print('Player wallet: ' + str(wallet) + ', Player bet: ' + str(bet))
             print('Player sum: ' + str(Player))
         if show == False:
             print('Dealer\'s Hand: \tcovered, ' + str(dcard2))
@@ -63,6 +64,7 @@ def Blackjack():
             for cards in PlayerHand:
                 print(str(cards) +  ', ', end='')
             print(' ')
+            print('Player wallet: ' + str(wallet) + ', Player bet: ' + str(bet))
             print('Player sum: ' + str(Player))
 
 
@@ -88,6 +90,14 @@ def Blackjack():
     time.sleep(.5)
 
     print('.\n\n')
+
+    print('You have ' + str(wallet) + ' dollars, how much would you like to bet?  ', end='')
+    bet = 0
+    while bet <= 0 or bet > wallet:
+        print('Invalid input: ' + str(bet) + ', please enter a number between 1 and ' + str(wallet))
+        bet = int(input())
+    wallet -= bet
+
     
 
     
@@ -114,7 +124,8 @@ def Blackjack():
     printHands(False)
 
     if Player > 21:
-        print('You went bust! Your hand had a value of ' + Player) # TODO add support for continued games
+        print('You went bust! You lost $' + str(bet) + '!')
+        return (False, wallet)
         
     print('\n')
     print('would you like to stand (s), or hit(h)?')
@@ -132,7 +143,7 @@ def Blackjack():
             print('Your new total is ' + str(Player))
             if Player > 21:
                 print('You went bust!')
-                break
+                return (False, wallet)
             print('would you like to stand (s), or hit(h)?')
             action = input()
             while action != 's' and action != 'h':
@@ -147,25 +158,26 @@ def Blackjack():
             print('The Dealer drew a ' + str(newCard.value) + ' of ' + newCard.suit + '. Dealer total: ' + str(Dealer))
         if Dealer > 21 and Player <= 21:
             printHands(True)
-            print('The dealer went bust with a total of ' + str(Dealer) + '! You win!')
-            return True
+            print('The dealer went bust with a total of ' + str(Dealer) + '! You won $' + str(bet) + '!')
+            return (True, wallet + (2 * bet))
         if Player > Dealer and Player <= 21: # TODO Add support for 21 getting double winnings
             printHands(True)
-            print('You won!')
-            return True
+            print('You won $' + str(bet) + '!')
+            return (True, wallet + (2 * bet))
         if Player == Dealer and Player <= 21: 
             printHands(True)
             print('You tied!')
-            return False
+            return (False, wallet + bet)
         if Dealer > Player and Dealer <= 21:
             printHands(True)
-            print('You lost!')
-            return False
+            print('You lost $' + str(bet) + '!')
+            return (False, wallet)
 
 
         
     
 numWins = 0
+wallet = 1000
 print(' __          __  _                            _          ____  _            _    _            _    _ ')
 print(' \ \        / / | |                          | |        |  _ \| |          | |  (_)          | |  | |')
 print('  \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |_) | | __ _  ___| | ___  __ _  ___| | _| |')
@@ -175,16 +187,21 @@ print('     \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/  |____/|_|\__,_|\_
 print('                                                                               _/ |                ')
 print('     Game by Are Oelsner                                                      |__/                \n')
 action = 'y'
-while action == 'y':
-    if Blackjack() == True:
+while action == 'y' and wallet > 0:
+    game = Blackjack(wallet)
+    wallet = game[1]
+    if game[0] == True:
         numWins += 1
 
-    print('Thank you for playing! You have won ' + str(numWins) + ' games, would you like to play again? (y/n): ', end='')
-    action = input()
-    while action != 'y' and action != 'n':
-        print('invalid response, would you like to play again? (y/n)')
+    if wallet > 0:
+        print('Thank you for playing! You have won ' + str(numWins) + ' games and have $' + str(wallet) + ', would you like to play again? (y/n): ', end='')
         action = input()
-print('\n\n\n\n\n\nThank you for playing! You won ' + str(numWins) + ' games!')
+        while action != 'y' and action != 'n':
+            print('invalid response, would you like to play again? (y/n)')
+            action = input()
+    if wallet <= 0:
+        print('You ran out of money!')
+print('\n\n\n\n\n\nThank you for playing! You won ' + str(numWins) + ' games and have $' + str(wallet) + '!')
 
 
 
