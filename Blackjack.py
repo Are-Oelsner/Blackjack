@@ -156,6 +156,10 @@ def Blackjack(wallet):
             DealerHand.append(newCard.value)
             Dealer += newCard.value
             print('The Dealer drew a ' + str(newCard.value) + ' of ' + newCard.suit + '. Dealer total: ' + str(Dealer))
+        if Dealer < 21 and Player == 21:
+            printHands(True)
+            print('Blackjack! You won $' + str(bet * 1.5) + '!')
+            return(True, wallet + (bet * 1.5))
         if Dealer > 21 and Player <= 21:
             printHands(True)
             print('The dealer went bust with a total of ' + str(Dealer) + '! You won $' + str(bet) + '!')
