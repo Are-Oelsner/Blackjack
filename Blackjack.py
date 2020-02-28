@@ -99,8 +99,6 @@ def Blackjack(wallet):
     wallet -= bet
 
     
-
-    
     Player = 0              # Current value of Player hand
     Dealer = 0              # Current value of Dealer hand
     PlayerHand = []         # Successive cards added to Player after initial two
@@ -164,7 +162,7 @@ def Blackjack(wallet):
             printHands(True)
             print('The dealer went bust with a total of ' + str(Dealer) + '! You won $' + str(bet) + '!')
             return (True, wallet + (2 * bet))
-        if Player > Dealer and Player <= 21: # TODO Add support for 21 getting double winnings
+        if Player > Dealer and Player <= 21: 
             printHands(True)
             print('You won $' + str(bet) + '!')
             return (True, wallet + (2 * bet))
