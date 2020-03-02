@@ -1,5 +1,11 @@
 # Author: Are Oelsner
 # This is a single-deck blackjack simulation
+    # If the dealer has >= 17 with first two cards it must stand. If it is 16 or under it must take a card.
+    # It must then continue to take cards until the total is 17 or higher, but not over 21, or goes bust if it
+    # is over 21. The dealer must count an ace as 11 and stand
+    # Allow Aces to be 1 or 11
+    # Add support for splitting and doubling down
+    
 import random
 import time
 
@@ -68,13 +74,6 @@ def Blackjack(wallet):
             print('Player sum: ' + str(Player))
 
 
-    # Check dealers hand for 21 before hitting
-    # If the dealer has >= 17 with first two cards it must stand. If it is 16 or under it must take a card.
-    # It must then continue to take cards until the total is 17 or higher, but not over 21, or goes bust if it
-    # is over 21. The dealer must count an ace as 11 and stand
-    # Allow Aces to be 1 or 11
-    # Add support for splitting and doubling down
-    
     print('Game start!')
     # Initializes and prepares the deck
     D = Deck()
@@ -178,8 +177,12 @@ def Blackjack(wallet):
 
         
     
-numWins = 0
-wallet = 1000
+# Game Start
+numWins = 0     # numWins tracks number of wins in current session
+wallet = 1000   # wallet tracks the current player balance that bets are drawn from
+
+
+# Introductory Banner
 print(' __          __  _                            _          ____  _            _    _            _    _ ')
 print(' \ \        / / | |                          | |        |  _ \| |          | |  (_)          | |  | |')
 print('  \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |_) | | __ _  ___| | ___  __ _  ___| | _| |')
@@ -188,6 +191,10 @@ print('    \  /\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |_) | | (_| | (
 print('     \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/  |____/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_(_) ')
 print('                                                                               _/ |                ')
 print('     Game by Are Oelsner                                                      |__/                \n')
+
+
+
+# Game loop
 action = 'y'
 while action == 'y' and wallet > 0:
     game = Blackjack(wallet)
@@ -203,7 +210,7 @@ while action == 'y' and wallet > 0:
             action = input()
     if wallet <= 0:
         print('You ran out of money!')
-print('\n\n\n\n\n\nThank you for playing! You won ' + str(numWins) + ' games and have $' + str(wallet) + '!')
+print('\n\n\n\n\nThank you for playing! You won ' + str(numWins) + ' games and have $' + str(wallet) + '!')
 
 
 
