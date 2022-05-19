@@ -1,4 +1,4 @@
-# Author: Are Oelsner
+# Author: Aria Oelsner
 # This is a single-deck blackjack simulation
     # If the dealer has >= 17 with first two cards it must stand. If it is 16 or under it must take a card.
     # It must then continue to take cards until the total is 17 or higher, but not over 21, or goes bust if it
@@ -195,7 +195,7 @@ print('   \ \/  \/ / _ \ |/ __/ _ \| \'_ ` _ \ / _ \ | __/ _ \  |  _ <| |/ _` |/
 print('    \  /\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |_) | | (_| | (__|   <| | (_| | (__|   <|_| ')
 print('     \/  \/ \___|_|\___\___/|_| |_| |_|\___|  \__\___/  |____/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_(_) ')
 print('                                                                               _/ |                ')
-print('     Game by Are Oelsner                                                      |__/                \n')
+print('     Game by Aria Oelsner                                                      |__/                \n')
 
 
 
